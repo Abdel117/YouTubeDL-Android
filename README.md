@@ -9,9 +9,10 @@ y seguidamente copia los archivos del repositorio.
 IMPORTANTE :
   Debes seguir los pasos indicados en https://chaquo.com/chaquopy/doc/current/android.html para añadir el plugin de Chaquopy
 
-- Modifica la ruta a tu python.exe y a tu directorio de script python tal y como lo indica la documentación proporcionada. Por lo general para el directorio de scripts se recomienda src/main/python
+- Modifica la ruta a tu python.exe y a tu directorio de scripts python tal y como lo indica la documentación proporcionada. Por lo general para el directorio de scripts se recomienda src/main/python.
+- Añade las dependencias necesarias de python (pytube y Python-IO) como se indica anteriormente.
 - Dentro del código encontrarás las anotaciones necesarias para su correcta ejecución.
-- RECUERDA AÑADIR CORRECTAMENTE LOS PERMISOS DE ESCRITURA E INTERNET
+- RECUERDA AÑADIR CORRECTAMENTE LOS PERMISOS DE ESCRITURA Y ACCESO A INTERNET.
 
 Info: 
 * El emulador que he probado ha sido un Nexus 5X version 11.0+
