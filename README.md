@@ -11,9 +11,9 @@ IMPORTANTE :
 
 - Modifica la ruta a tu python.exe y a tu directorio de script python. Por lo general se recomienda src/main/python
 - Dentro del código encontrarás las anotaciones necesarias para su correcta ejecución.
-
+- RECUERDA AÑADIR CORRECTAMENTE LOS PERMISOS DE ESCRITURA E INTERNET
 
 Info: 
 El emulador que he probado ha sido un Nexus 5X version 11.0+
 Por defecto en el archivo script.py se obtienen los datos del audio, te invito a modificar esto tal y como quieras.
-
+La UI queda a tu creatividad.
