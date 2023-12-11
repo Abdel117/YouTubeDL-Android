@@ -29,10 +29,9 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getSongData(): ByteArray {
+        //Accede al modulo script y llama a la funcion download_audio
         val py = Python.getInstance()
         val module = py.getModule("script")
-
-        println("Algo está haciendo ")
 
         val audioContent = module.callAttr(
             "download_audio",
