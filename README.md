@@ -14,6 +14,6 @@ IMPORTANTE :
 - RECUERDA AÑADIR CORRECTAMENTE LOS PERMISOS DE ESCRITURA E INTERNET
 
 Info: 
-El emulador que he probado ha sido un Nexus 5X version 11.0+
-Por defecto en el archivo script.py se obtienen los datos del audio, te invito a modificar esto tal y como quieras.
-La UI queda a tu creatividad.
+* El emulador que he probado ha sido un Nexus 5X version 11.0+
+* Por defecto en el archivo script.py se obtienen los datos del audio, te invito a modificar esto tal y como quieras.
+* La UI queda a tu creatividad.
