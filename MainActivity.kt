@@ -1,5 +1,3 @@
-package com.abdel.youtubesimpledownloader
-
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
