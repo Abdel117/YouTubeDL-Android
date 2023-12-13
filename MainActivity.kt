@@ -16,57 +16,62 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        try {
-            //Llamamos al módulo que gestiona el código de python
-            val resultBytes = getSongData()
-            //Guarda el contenido del enlace en el dispositivo (android/data/app/music/archivo)
-            saveWebmFile(resultBytes)
-        } catch (e: IOException) {
-            Toast.makeText(this, "Error al descargar: ${e.message}", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "Error desconocido: ${e.message}", Toast.LENGTH_SHORT).show()
-        }
+        //Esta versión solo funciona con videos 
+        //Los videos que no se pueden descargar están especificados en la documentacion de pytube
+        val url = "https://www.youtube.com/watch?v=ID_VIDEO"
+
+        val runnable = DownloadPytubeRunnable(url)
+        Thread(runnable).start()
     }
 
-    private fun getSongData(): ByteArray {
-        //Accede al modulo script y llama a la funcion download_audio
-        val py = Python.getInstance()
-        val module = py.getModule("script")
-
-        val audioContent = module.callAttr(
-            "download_audio",
-            "https://www.youtube.com/results?search_query=never+gonna+give+you+up" //Cambia el enlace con cualquier video que quieras
-        )
-
-
-        return audioContent.toJava(ByteArray::class.java)
+    //Clase para ejecutar la descarga en otro hilo
+    inner class DownloadPytubeRunnable(val url : String) : Runnable {
+        @RequiresApi(Build.VERSION_CODES.R)
+        override fun run() {
+            saveFilePytube(url)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
-    private fun saveWebmFile(data: ByteArray) {
+    fun saveFilePytube(url: String) {
         try {
-            val directory = getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+            val sslContext = SSLContext.getInstance("TLSv1.2")
+            sslContext.init(null, null, null)
+            SSLContext.setDefault(sslContext)
+            val py = Python.getInstance()
+            val module = py.getModule("script")
 
-            if (directory != null) {
-                val file = File(directory, "downloaded_file.webm")
+            // Obtén el directorio principal de la aplicación
+            val directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
 
-                // Crea el directorio si no existe
-                if (!file.parentFile?.exists()) {
-                    file.parentFile?.mkdirs()
-                }
+            // Nombre del archivo basado en el título del video
+            val video = module.callAttr("YouTube", url)
+            val fileName = video["title"].toString() + ".mp4"
 
-                // Escribe los datos en el archivo usando un bloque use
-                FileOutputStream(file).use { outputStream ->
-                    outputStream.write(data)
-                }
+            // Ruta completa del archivo
+            val filePath = File(directory, fileName).absolutePath
 
-                println("Archivo descargado satisfactoriamente en: ${file.absolutePath}")
-            } else {
-                println("Error al obtener el directorio externo")
-            }
-        } catch (e: IOException) {
-            println("Ha fallado: $e")
-            // Trata la excepción de alguna manera (mostrar un mensaje al usuario, etc.)
+            // Descarga el archivo en el directorio principal de la aplicación ./android/com.tu.proyecto/Download/fileName/
+            video["streams"]?.callAttr("get_highest_resolution")?.callAttr("download", filePath)
+
+            showToast("Archivo descargado satisfactoriamente en: $filePath")
+            Log.d("Descarga Exitosa", "Archivo descargado satisfactoriamente en: $filePath")
+
+        } catch (e: Exception) {
+            // Manejar excepciones
+            Log.d("Descarga Fallida", e.toString())
+            showToast("Archivo no descargado")
         }
+    }
+
+    
+    private fun showToast(message: String) {
+        runOnUiThread {
+            Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun runOnUiThread(action: () -> Unit) {
+        Handler(Looper.getMainLooper()).post(action)
     }
 }
