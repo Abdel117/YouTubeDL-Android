@@ -2,7 +2,7 @@
 YouTube Simple Downloader
 Una pequeña demo para probar la librería Chaquopy para trabajar con Python y Kotlin desde Android Studio
 
-- Instala Python 3.11 si aun no lo has hecho.
+- Instala Python 3.8 si aun no lo has hecho.
 - Para probar el proyecto instala Android Studio Giraffe y crea un proyecto en Kotlin Groovy (Mi recomendación)
 y seguidamente copia los archivos del repositorio.
 
@@ -15,6 +15,8 @@ IMPORTANTE :
 - RECUERDA AÑADIR CORRECTAMENTE LOS PERMISOS DE ESCRITURA Y ACCESO A INTERNET.
 
 Info: 
-* El emulador que he probado ha sido un Nexus 5X version 11.0+
-* Por defecto en el archivo script.py se obtienen los datos del audio, te invito a modificar esto tal y como quieras.
+* La demo ha sido debuggeada en un móvil físico
 * La UI queda a tu creatividad.
+
+Errores comunes: 
+* Los errores más comunes tienen que ver con la conexión a internet. Si estás usando un emulador: revisa los permisos de android studio y la configuración de internet. Si el problema persiste prueba con un móvil android físico.
