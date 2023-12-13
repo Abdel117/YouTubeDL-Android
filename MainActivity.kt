@@ -36,8 +36,9 @@ class MainActivity : ComponentActivity() {
             val sslContext = SSLContext.getInstance("TLSv1.2")
             sslContext.init(null, null, null)
             SSLContext.setDefault(sslContext)
-            val py = Python.getInstance()
-            val module = py.getModule("script")
+            
+            val py = Python.getInstance() 
+            val module = py.getModule("script") //Modulo de python desde el que se importa pytube
 
             // Obtén el directorio principal de la aplicación
             val directory = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
