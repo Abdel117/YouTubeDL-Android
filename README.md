@@ -16,6 +16,7 @@ IMPORTANTE :
 - Por defecto solo se muestra un Toast con la información de la ejecución.
   
 Info: 
+* Para aprender como se usa chaquopy en profundidad revisa su documentación y ejemplos
 * La demo ha sido debuggeada en un móvil físico
 * La UI queda a tu creatividad.
 
